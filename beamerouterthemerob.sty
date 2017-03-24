@@ -1,0 +1,32 @@
+\mode<presentation>
+
+% ufblue defined in colortheme
+\setbeamercolor{headerfooter}{bg=white, fg=ufblue}
+
+% Remove header
+\setbeamertemplate{header}{}
+
+% Set up titlebar
+\setbeamertemplate{frametitle}{
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex, center]{headerfooter}
+        \hspace{2ex}\raggedright\textbf{\insertframetitle}
+        \hfill
+        \raggedleft\includegraphics[width=.2\paperwidth]{uf_horiz_logo}\hspace{2ex}
+    \end{beamercolorbox}
+}
+
+% Set up footer
+\setbeamertemplate{footline}{
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex, center]{headerfooter}
+        \hspace{2ex}\raggedright\inserttitle 
+        \hfill 
+        \insertsection
+        \hfill
+        \raggedleft\insertframenumber{} / \inserttotalframenumber \hspace{2ex}
+    \end{beamercolorbox}
+}
+
+% Remove navigation symbols/buttons
+\setbeamertemplate{navigation symbols}{}
+
+\mode<all>

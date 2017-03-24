@@ -1,0 +1,84 @@
+\documentclass{beamer}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{rotating}
+\hypersetup{colorlinks=true}
+\usetheme{rob}
+%\usetheme{Boadilla}
+%\useinnertheme{circles}
+%\useoutertheme{infolines}
+%\usecolortheme{whale}
+
+\title[G4DMC]{Excessive Phonon Energy in G4DMC Events}
+\author{Rob Agnese}
+\institute{University of Florida}
+\date{February 27, 2017}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+    \titlepage{}
+\end{frame}
+
+\begin{frame}{The Problem}
+    \vfill
+    While debugging the track weighting discrepencies, I noticed that
+    even without downsampling, we were getting too much energy out from a 
+    simulation. \\
+
+    For an electron recoil we should expect:
+    \begin{equation}
+        E_{phonon} = E_{recoil} + 4 \textrm{volt} \times 
+        \textrm{floor}\left(\frac{E_{recoil}}{E_{pair}}\right)
+    \end{equation}
+
+    For the 1 keV event I tested, that should be $\sim$ 2.4 keV. G4DMC collected
+    a total of $\sim$ 3.1 keV of phonon energy.
+    \vfill
+\end{frame}
+
+\begin{frame}{Investigation}
+    \vfill
+    Some immediate consistency checks:
+    \begin{itemize}
+        \item Charge drift speeds still match data.
+        \item Energy partitioner creates correct initial tracks (energies sum to $E_{recoil}$).
+        \item Luke phonon emissions conserve energy on case-by-case basis.
+    \end{itemize}
+    \vfill
+\end{frame}
+
+\begin{frame}{Tests}
+    \vfill
+    We have checked several potential sources of error:
+    \begin{itemize}
+        \item Use uniform electric field instead of COMSOL field - \textbf{no change}.
+        \item Turn off inter-valley scattering (known to be non-physical) - \textbf{no change}.
+        \item Create only phonons - \textbf{Correct energy output}!
+        \item Shoot exactly one charge carrier pair - \textbf{Excess still present}.
+    \end{itemize}
+    \vfill
+\end{frame}
+
+\begin{frame}{Places Left to Look}
+    \vfill
+    The bug must be in the charge physics. We've ruled out inter-valley scattering
+    and Luke phonon emission. The drift curves also should rule out E-field
+    acceleration bugs. There are three processes left:
+    \begin{itemize}
+        \item DriftBoundaryProcess - When a charge carrier is absorbed, releases
+            its kinetic energy as phonons.
+        \item DriftRecombinationProcess - When a charge carrier comes to rest
+            in the crystal, it is killed and releases half of the gap energy
+            as phonons.
+        \item EnergyLimiter - When any particle is below its energy threshold,
+            it is simply killed and deposits its kinetic energy as NIEL. This
+            shouldn't be triggering ever for charge carriers as threshold = 0.
+    \end{itemize}
+    \vfill
+\end{frame}
+
+\end{document}

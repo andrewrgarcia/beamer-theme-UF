@@ -1,6 +1,6 @@
 \mode<presentation>
 
-% ufblue defined in colortheme
+\definecolor{ufblue}{RGB}{0, 33, 165}
 \setbeamercolor{headerfooter}{bg=white, fg=ufblue}
 
 % Remove header - needed?
@@ -18,10 +18,8 @@
 % Set up footer
 \setbeamertemplate{footline}{
     \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex, center]{headerfooter}
-        \hspace{2ex}\raggedright\inserttitle 
+        \hspace{2ex}\raggedright Section: \insertsection
         \hfill 
-        \insertsection
-        \hfill
         \raggedleft\insertframenumber{} / \inserttotalframenumber \hspace{2ex}
     \end{beamercolorbox}
 }

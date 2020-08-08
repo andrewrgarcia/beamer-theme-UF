@@ -5,6 +5,10 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{rotating}
+%ARG Added: Landscape (widescreen) presentation 16:9
+\usepackage{beamerthemesplit}
+\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} 
+
 \hypersetup{colorlinks=true}
 \usetheme{rob}
 %\usetheme{Boadilla}
@@ -12,10 +16,18 @@
 %\useoutertheme{infolines}
 %\usecolortheme{whale}
 
+
+%\title[G4DMC]{Excessive Phonon Energy in G4DMC Events\\[1em]\includegraphics[width=3cm]{gator.png}}
+
 \title[G4DMC]{Excessive Phonon Energy in G4DMC Events}
+\titlegraphic{\includegraphics[width=3.5cm]{gator.png}}
+%\subtitle{\textbf{Subtitle}}
+
 \author{Rob Agnese}
 \institute{University of Florida}
 \date{February 27, 2017}
+
+
 
 \begin{document}
 
@@ -80,5 +92,43 @@
     \end{itemize}
     \vfill
 \end{frame}
+
+%ARG Added: Slides 5- 7 
+%Credit -- Beamer Presentations: A Tutorial for Beginners (Part 2)—Lists, Columns, Pictures, Descriptions and Tables https://www.overleaf.com/learn/latex/Beamer_Presentations:_A_Tutorial_for_Beginners_(Part_2)%E2%80%94Lists,_Columns,_Pictures,_Descriptions_and_Tables
+
+\begin{frame}
+\frametitle{Using Columns}
+\begin{columns}
+\column{0.5\textwidth}
+<text>
+\column{0.5\textwidth}
+<text>
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Using Columns}
+\begin{columns}
+\column{0.5\textwidth}
+<text>
+\column{0.5\textwidth}
+\centering 
+\includegraphics[width=3.5cm]{gator.png}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Pictures}
+\begin{figure}
+\includegraphics[scale=0.2]{gator.png}
+\caption{scaled gator (0.2x)}
+\end{figure}
+<text>
+\end{frame}
+
+
 
 \end{document}
